@@ -3,80 +3,823 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Shreepoorna Purohit — AI/ML, NLP, Distributed Systems" />
   <title>Shreepoorna Purohit</title>
+
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
+    :root{
+      --bg0:#06070b;
+      --bg1:#0b1020;
+      --card: rgba(255,255,255,0.06);
+      --card2: rgba(255,255,255,0.09);
+      --stroke: rgba(255,255,255,0.12);
+      --text:#e8ecff;
+      --muted: rgba(232,236,255,0.72);
+      --muted2: rgba(232,236,255,0.55);
+      --accent:#7c3aed;   /* violet */
+      --accent2:#22d3ee;  /* cyan */
+      --accent3:#f97316;  /* orange */
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 22px;
+      --max: 1060px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background:
+        radial-gradient(900px 600px at 10% 10%, rgba(124,58,237,.30), transparent 60%),
+        radial-gradient(900px 600px at 90% 20%, rgba(34,211,238,.22), transparent 55%),
+        radial-gradient(900px 600px at 40% 95%, rgba(249,115,22,.16), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    /* subtle noise */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity:.22;
+    }
+
+    /* animated aurora blobs */
+    .blob{
+      position:fixed;
+      width:520px; height:520px;
+      filter: blur(50px);
+      opacity:.22;
+      border-radius: 50%;
+      z-index:-1;
+      animation: drift 16s ease-in-out infinite;
+    }
+    .blob.b1{
+      left:-140px; top:-120px;
+      background: radial-gradient(circle at 30% 30%, rgba(124,58,237,.9), rgba(124,58,237,0) 55%);
+    }
+    .blob.b2{
+      right:-180px; top:40px;
+      background: radial-gradient(circle at 40% 40%, rgba(34,211,238,.9), rgba(34,211,238,0) 55%);
+      animation-duration: 19s;
+    }
+    .blob.b3{
+      left:140px; bottom:-240px;
+      background: radial-gradient(circle at 45% 45%, rgba(249,115,22,.9), rgba(249,115,22,0) 55%);
+      animation-duration: 22s;
+    }
+    @keyframes drift{
+      0%{ transform: translate3d(0,0,0) scale(1); }
+      50%{ transform: translate3d(40px,25px,0) scale(1.08); }
+      100%{ transform: translate3d(0,0,0) scale(1); }
+    }
+
+    /* particles canvas */
+    #fx{
+      position:fixed; inset:0;
+      z-index:-2;
+      opacity:.65;
+    }
+
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 34px 18px 80px;
+    }
+
+    /* top nav */
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 12px 14px;
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border-radius: 999px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 14px;
+      z-index: 10;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 200px;
+    }
+    .dot{
+      width:12px; height:12px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff, rgba(255,255,255,0) 45%),
+                  linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 24px rgba(124,58,237,.45);
+    }
+    .brand span{
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .navlinks{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content:center;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      text-decoration:none;
+      font-size: 13px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .pill:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.20);
+    }
+
+    .cta{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:flex-end;
+      min-width: 200px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: linear-gradient(135deg, rgba(124,58,237,.35), rgba(34,211,238,.18));
+      color: var(--text);
+      text-decoration:none;
+      font-weight:600;
+      font-size: 13px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.25);
+      transition: transform .15s ease, filter .2s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.08); }
+
+    /* hero */
+    .hero{
+      margin-top: 28px;
+      display:grid;
+      grid-template-columns: 1.4fr .6fr;
+      gap: 18px;
+    }
+    @media (max-width: 860px){
+      .hero{ grid-template-columns: 1fr; }
+      .cta{ min-width: auto; }
+      .brand{ min-width: auto; }
+    }
+
+    .card{
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .card::after{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(500px 200px at 30% 0%, rgba(124,58,237,.22), transparent 60%),
+                  radial-gradient(500px 200px at 80% 10%, rgba(34,211,238,.18), transparent 60%);
+      pointer-events:none;
+      opacity:.9;
+    }
+
+    .pad{ padding: 22px 22px; position:relative; z-index:1; }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing:.2px;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+    .kicker b{
+      color: var(--text);
+      font-weight:700;
+    }
+
+    h1{
+      margin: 0 0 10px;
+      font-size: clamp(34px, 4.2vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -0.6px;
+    }
+
+    .sub{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 15px;
       line-height: 1.6;
-      color: #1f2937;
+      max-width: 64ch;
     }
-    h1, h2 {
-      color: #111827;
+
+    .typed{
+      display:inline-block;
+      padding: 6px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.20);
+      font-weight: 600;
+      color: rgba(232,236,255,0.92);
     }
-    a {
-      color: #2563eb;
-      text-decoration: none;
+    .cursor{
+      display:inline-block;
+      width: 8px;
+      margin-left: 6px;
+      opacity: 1;
+      animation: blink 1s step-end infinite;
     }
-    a:hover {
-      text-decoration: underline;
+    @keyframes blink{ 50%{ opacity: 0; } }
+
+    /* stats */
+    .stats{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
     }
-    .project {
-      margin-bottom: 16px;
+    @media (max-width: 520px){ .stats{ grid-template-columns: 1fr; } }
+
+    .stat{
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      border-radius: 18px;
+      padding: 14px 14px;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
     }
+    .stat:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.20);
+    }
+    .stat .big{
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: .2px;
+    }
+    .stat .small{
+      margin-top: 4px;
+      color: var(--muted2);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    /* side card */
+    .side{
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+    }
+    .mini{
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .mini h3{
+      margin: 0 0 8px;
+      font-size: 13px;
+      color: rgba(232,236,255,0.9);
+      letter-spacing:.2px;
+      text-transform: uppercase;
+    }
+    .mini p{
+      margin:0;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* sections */
+    section{ margin-top: 18px; }
+    .section-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin: 26px 0 12px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: .2px;
+    }
+    .section-title span{
+      color: var(--muted2);
+      font-size: 13px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 960px){ .grid{ grid-template-columns: 1fr; } }
+
+    .proj{
+      position:relative;
+      border:1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border-radius: var(--radius);
+      padding: 16px 16px 14px;
+      overflow:hidden;
+      transform: translateY(8px);
+      opacity: 0;
+      transition: transform .7s cubic-bezier(.2,.8,.2,1), opacity .7s ease;
+    }
+    .proj.reveal{
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .proj::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(500px 180px at 20% 0%, rgba(124,58,237,.20), transparent 60%),
+        radial-gradient(500px 180px at 90% 10%, rgba(34,211,238,.14), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+
+    .proj .inner{ position:relative; z-index:1; }
+
+    .proj a.title{
+      display:inline-block;
+      text-decoration:none;
+      color: var(--text);
+      font-weight: 750;
+      letter-spacing: .2px;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+    .proj a.title:hover{ text-decoration: underline; }
+
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      margin: 10px 0 10px;
+    }
+    .tag{
+      font-size: 11px;
+      color: rgba(232,236,255,0.82);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.18);
+      padding: 6px 8px;
+      border-radius: 999px;
+    }
+
+    .proj p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .links{
+      margin-top: 12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .slink{
+      font-size: 12px;
+      color: rgba(232,236,255,0.9);
+      text-decoration:none;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      padding: 8px 10px;
+      border-radius: 999px;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .slink:hover{ transform: translateY(-1px); background: rgba(255,255,255,0.07); }
+
+    /* footer */
+    footer{
+      margin-top: 22px;
+      padding: 18px 0 0;
+      color: rgba(232,236,255,0.55);
+      font-size: 12px;
+      text-align:center;
+    }
+
+    /* entrance animation */
+    .fade-in{
+      opacity:0;
+      transform: translateY(10px);
+      animation: in .9s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+    .fade-in.d2{ animation-delay: .12s; }
+    .fade-in.d3{ animation-delay: .24s; }
+    @keyframes in{
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    /* sparkle hover */
+    .spark{
+      position:absolute;
+      width:220px; height:220px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.22), rgba(255,255,255,0) 55%);
+      filter: blur(18px);
+      opacity: 0;
+      transform: translate(-50%,-50%);
+      pointer-events:none;
+      transition: opacity .25s ease;
+    }
+    .proj:hover .spark{ opacity: .65; }
+
+    /* smooth scroll */
+    html{ scroll-behavior:smooth; }
   </style>
 </head>
 
 <body>
-  <h1>Shreepoorna Purohit</h1>
-  <p>
-    M.S. Computer Science @ Northeastern University<br />
-    Former SDE-2 @ IBM Cloud<br />
-    AI/ML · NLP · Distributed Systems
-  </p>
+  <canvas id="fx"></canvas>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
 
-  <p>
-    <a href="https://www.linkedin.com/in/shreepoorna-dp-870737192">LinkedIn</a> ·
-    <a href="https://github.com/Shreepoorna1903">GitHub</a> ·
-    <a href="mailto:purohit.shr@northeastern.edu">Email</a>
-  </p>
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand">
+        <div class="dot"></div>
+        <span>Shreepoorna Purohit</span>
+      </div>
 
-  <h2>Projects</h2>
+      <div class="navlinks">
+        <a class="pill" href="#projects">✨ Projects</a>
+        <a class="pill" href="#stack">🧰 Stack</a>
+        <a class="pill" href="#contact">📬 Contact</a>
+      </div>
 
-  <div class="project">
-    <strong>
-      <a href="https://github.com/Shreepoorna1903/News-Sentiment-Analysis-for-Predicting-Next-Day-Stock-Movements">
-        News Sentiment Analysis for Stock Movement Prediction
-      </a>
-    </strong>
-    <p>
-      NLP pipeline using FinBERT, VADER, and transformer embeddings to predict next-day stock movements from financial news.
-    </p>
+      <div class="cta">
+        <a class="btn" href="https://www.linkedin.com/in/shreepoorna-dp-870737192" target="_blank" rel="noreferrer">in LinkedIn</a>
+        <a class="btn" href="https://github.com/Shreepoorna1903" target="_blank" rel="noreferrer">↗ GitHub</a>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="card">
+        <div class="pad">
+          <div class="kicker fade-in">
+            <b>M.S. CS @ Northeastern University</b> · Former SDE-2 @ IBM Cloud
+          </div>
+
+          <h1 class="fade-in d2">
+            Building scalable systems <br/>
+            with <span class="typed" id="typed"></span><span class="cursor">▍</span>
+          </h1>
+
+          <p class="sub fade-in d3">
+            I work at the intersection of <b>AI/ML</b>, <b>NLP</b>, and <b>Distributed Systems</b> — shipping reliable cloud backends and
+            research-driven ML projects with measurable results.
+          </p>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="big">4.00/4.00</div>
+              <div class="small">MSCS CGPA (Northeastern)</div>
+            </div>
+            <div class="stat">
+              <div class="big">15+ regions</div>
+              <div class="small">Cloud microservices deployed at IBM Cloud</div>
+            </div>
+            <div class="stat">
+              <div class="big">NLP + CV</div>
+              <div class="small">FinBERT, probing, melanoma detection</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="side">
+        <div class="mini card fade-in d2">
+          <div class="pad">
+            <h3>Focus</h3>
+            <p>Transformers · Representation learning · ML systems · Cloud-native backend engineering</p>
+          </div>
+        </div>
+
+        <div class="mini card fade-in d3">
+          <div class="pad">
+            <h3>Now</h3>
+            <p>Expanding ML depth (NLP/RL) while leveraging real-world distributed systems experience.</p>
+          </div>
+        </div>
+
+        <div class="mini card">
+          <div class="pad">
+            <h3 id="contact">Contact</h3>
+            <p>
+              <a class="pill" href="mailto:purohit.shr@northeastern.edu">✉️ Email</a>
+              <a class="pill" href="https://www.linkedin.com/in/shreepoorna-dp-870737192" target="_blank" rel="noreferrer">💼 LinkedIn</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="projects">
+      <div class="section-title">
+        <h2>✨ Featured Projects</h2>
+        <span>Click a card → repo / report / notebook</span>
+      </div>
+
+      <div class="grid">
+        <div class="proj" data-tilt>
+          <div class="spark"></div>
+          <div class="inner">
+            <a class="title" target="_blank" rel="noreferrer"
+               href="https://github.com/Shreepoorna1903/News-Sentiment-Analysis-for-Predicting-Next-Day-Stock-Movements">
+              📈 News Sentiment → Next-Day Stock Movement
+            </a>
+            <div class="tags">
+              <span class="tag">FinBERT</span>
+              <span class="tag">VADER</span>
+              <span class="tag">Transformers</span>
+              <span class="tag">Long-doc chunking</span>
+            </div>
+            <p>
+              NLP pipeline on financial news to predict next-day movement with noise-aware labeling and GPU fine-tuning.
+            </p>
+            <div class="links">
+              <a class="slink" target="_blank" rel="noreferrer"
+                 href="https://github.com/Shreepoorna1903/News-Sentiment-Analysis-for-Predicting-Next-Day-Stock-Movements">Repo</a>
+              <a class="slink" target="_blank" rel="noreferrer"
+                 href="https://github.com/Shreepoorna1903/News-Sentiment-Analysis-for-Predicting-Next-Day-Stock-Movements/blob/main/report/Final_Report_CS6120.pdf">Report</a>
+              <a class="slink" target="_blank" rel="noreferrer"
+                 href="https://github.com/Shreepoorna1903/News-Sentiment-Analysis-for-Predicting-Next-Day-Stock-Movements/blob/main/notebook/NLP_Project_Colab.ipynb">Notebook</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj" data-tilt>
+          <div class="spark"></div>
+          <div class="inner">
+            <a class="title" target="_blank" rel="noreferrer"
+               href="https://github.com/Shreepoorna1903/bert-layerwise-probing-ner">
+              🧠 Layer-wise Probing of BERT for NER
+            </a>
+            <div class="tags">
+              <span class="tag">BERT</span>
+              <span class="tag">CoNLL-2003</span>
+              <span class="tag">Probing</span>
+              <span class="tag">Interpretability</span>
+            </div>
+            <p>
+              Probed frozen BERT layers to locate where semantic signals emerge; peak <b>97.35% token-level accuracy</b>.
+            </p>
+            <div class="links">
+              <a class="slink" target="_blank" rel="noreferrer"
+                 href="https://github.com/Shreepoorna1903/bert-layerwise-probing-ner">Repo</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj" data-tilt>
+          <div class="spark"></div>
+          <div class="inner">
+            <a class="title" target="_blank" rel="noreferrer"
+               href="https://github.com/Shreepoorna1903/melanoma-skin-cancer-detection-cnn">
+              🧬 Melanoma Skin Cancer Detection (CNN)
+            </a>
+            <div class="tags">
+              <span class="tag">TensorFlow</span>
+              <span class="tag">Keras</span>
+              <span class="tag">Medical Imaging</span>
+              <span class="tag">Augmentation</span>
+            </div>
+            <p>
+              Multi-class skin lesion classification with augmentation + class balancing to improve generalization.
+            </p>
+            <div class="links">
+              <a class="slink" target="_blank" rel="noreferrer"
+                 href="https://github.com/Shreepoorna1903/melanoma-skin-cancer-detection-cnn">Repo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack">
+      <div class="section-title">
+        <h2>🧰 Tech Stack</h2>
+        <span>AI/ML + Systems</span>
+      </div>
+
+      <div class="grid">
+        <div class="proj reveal">
+          <div class="inner">
+            <a class="title" href="javascript:void(0)">ML / NLP</a>
+            <div class="tags">
+              <span class="tag">PyTorch</span>
+              <span class="tag">TensorFlow</span>
+              <span class="tag">Transformers</span>
+              <span class="tag">scikit-learn</span>
+            </div>
+            <p>Embeddings, fine-tuning, evaluation, long-document strategies, and interpretability experiments.</p>
+          </div>
+        </div>
+
+        <div class="proj reveal">
+          <div class="inner">
+            <a class="title" href="javascript:void(0)">Systems / Cloud</a>
+            <div class="tags">
+              <span class="tag">Go</span>
+              <span class="tag">Docker</span>
+              <span class="tag">Kubernetes</span>
+              <span class="tag">CI/CD</span>
+            </div>
+            <p>Cloud-native microservices, reliability engineering, idempotent workflows, observability (Grafana/Prometheus).</p>
+          </div>
+        </div>
+
+        <div class="proj reveal">
+          <div class="inner">
+            <a class="title" href="javascript:void(0)">Data / Tooling</a>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">SQL</span>
+              <span class="tag">Linux</span>
+              <span class="tag">Git</span>
+            </div>
+            <p>Fast iteration with notebooks, clean experimentation, and reproducible pipelines.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Built with ❤️ on GitHub Pages · © <span id="year"></span> Shreepoorna Purohit
+    </footer>
   </div>
 
-  <div class="project">
-    <strong>
-      <a href="https://github.com/Shreepoorna1903/bert-layerwise-probing-ner">
-        Layer-wise Probing of BERT for NER
-      </a>
-    </strong>
-    <p>
-      Probing frozen BERT layers on CoNLL-2003, achieving 97.35% token-level accuracy and analyzing representation emergence.
-    </p>
-  </div>
+  <script>
+    // typed headline
+    const phrases = [
+      "AI/ML ✨",
+      "NLP 🧠",
+      "Distributed Systems ⚙️",
+      "Reliable Engineering 🛰️"
+    ];
+    const el = document.getElementById("typed");
+    let pi = 0, ci = 0, deleting = false;
 
-  <div class="project">
-    <strong>
-      <a href="https://github.com/Shreepoorna1903/melanoma-skin-cancer-detection-cnn">
-        Melanoma Skin Cancer Detection Using CNN
-      </a>
-    </strong>
-    <p>
-      Deep CNN for multi-class skin cancer classification with data augmentation and class balancing.
-    </p>
-  </div>
+    function typeLoop(){
+      const current = phrases[pi];
+      if(!deleting){
+        ci++;
+        el.textContent = current.slice(0, ci);
+        if(ci >= current.length){
+          deleting = true;
+          setTimeout(typeLoop, 900);
+          return;
+        }
+      } else {
+        ci--;
+        el.textContent = current.slice(0, ci);
+        if(ci <= 0){
+          deleting = false;
+          pi = (pi + 1) % phrases.length;
+        }
+      }
+      setTimeout(typeLoop, deleting ? 35 : 55);
+    }
+    typeLoop();
 
+    // year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // scroll reveal for project cards
+    const cards = document.querySelectorAll(".proj");
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add("reveal");
+      });
+    }, { threshold: 0.12 });
+    cards.forEach(c=>io.observe(c));
+
+    // sparkle follows mouse on cards
+    document.querySelectorAll(".proj").forEach(card=>{
+      const spark = card.querySelector(".spark");
+      if(!spark) return;
+      card.addEventListener("mousemove", (e)=>{
+        const r = card.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        spark.style.left = x + "px";
+        spark.style.top = y + "px";
+      });
+    });
+
+    // subtle 3D tilt
+    document.querySelectorAll("[data-tilt]").forEach(card=>{
+      const max = 7;
+      card.addEventListener("mousemove", (e)=>{
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `rotateX(${(-y*max)}deg) rotateY(${(x*max)}deg) translateY(0px)`;
+      });
+      card.addEventListener("mouseleave", ()=>{
+        card.style.transform = "";
+      });
+    });
+
+    // particle background (lightweight)
+    const canvas = document.getElementById("fx");
+    const ctx = canvas.getContext("2d");
+    let w, h, dpr;
+
+    function resize(){
+      dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      w = canvas.width = Math.floor(window.innerWidth * dpr);
+      h = canvas.height = Math.floor(window.innerHeight * dpr);
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    const N = 70;
+    const pts = Array.from({length:N}, ()=>({
+      x: Math.random()*w,
+      y: Math.random()*h,
+      vx: (Math.random()-.5) * 0.22 * dpr,
+      vy: (Math.random()-.5) * 0.22 * dpr,
+      r: (Math.random()*1.6 + 0.8) * dpr
+    }));
+
+    function step(){
+      ctx.clearRect(0,0,w,h);
+
+      // draw links
+      for(let i=0;i<N;i++){
+        const a = pts[i];
+        a.x += a.vx; a.y += a.vy;
+
+        if(a.x < 0 || a.x > w) a.vx *= -1;
+        if(a.y < 0 || a.y > h) a.vy *= -1;
+
+        // points
+        ctx.beginPath();
+        ctx.arc(a.x, a.y, a.r, 0, Math.PI*2);
+        ctx.fillStyle = "rgba(232,236,255,0.55)";
+        ctx.fill();
+
+        for(let j=i+1;j<N;j++){
+          const b = pts[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const dist = Math.hypot(dx, dy);
+          const maxDist = 155 * dpr;
+          if(dist < maxDist){
+            const t = 1 - dist/maxDist;
+            ctx.strokeStyle = `rgba(124,58,237,${0.10*t})`;
+            ctx.lineWidth = 1 * dpr;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(step);
+    }
+    step();
+  </script>
 </body>
 </html>
