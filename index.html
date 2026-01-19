@@ -7,6 +7,9 @@
   <title>Shreepoorna Purohit | AI/ML & Systems Engineer</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
+    
+    /* Scroll Progress Bar */
+    .progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:1000;width:0%;transition:width .1s linear}
     :root{
       --bg:#09090b;--bg2:#111113;
       --card:rgba(255,255,255,0.025);--card-hover:rgba(255,255,255,0.05);
@@ -17,6 +20,9 @@
     }
     html{scroll-behavior:smooth}
     body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    
+    /* Animated Canvas Background */
+    #bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
     
     .bg-glow{position:fixed;border-radius:50%;filter:blur(150px);pointer-events:none;z-index:0}
     .glow1{width:700px;height:700px;background:var(--accent);top:-300px;left:-250px;opacity:0.12}
@@ -165,6 +171,17 @@
     .contact-label{font-size:12px;color:var(--text-dim)}
     .contact-value{font-size:14px;color:var(--text);font-weight:600}
 
+    /* Scroll Reveal Animations */
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-delay-1{transition-delay:.1s}
+    .reveal-delay-2{transition-delay:.2s}
+    .reveal-delay-3{transition-delay:.3s}
+    
+    /* Card Tilt Effect */
+    .tilt-card{transform-style:preserve-3d;transition:transform .15s ease-out}
+    .tilt-card .tilt-content{transform:translateZ(20px)}
+    
     footer{padding:40px 0;text-align:center;color:var(--text-dim);font-size:12px;border-top:1px solid var(--border)}
 
     .fade-up{opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}
@@ -174,6 +191,8 @@
   </style>
 </head>
 <body>
+  <div class="progress-bar" id="progress"></div>
+  <canvas id="bg-canvas"></canvas>
   <div class="bg-glow glow1"></div>
   <div class="bg-glow glow2"></div>
 
@@ -233,7 +252,7 @@
     <section id="education">
       <div class="section-header"><h2>🎓 Education</h2><p>Academic foundation in CS and engineering</p></div>
       <div class="edu-grid">
-        <div class="edu-card">
+        <div class="edu-card reveal">
           <div class="edu-top">
             <div><div class="edu-school">Northeastern University</div><div class="edu-loc">Boston, Massachusetts</div></div>
             <div class="edu-gpa">4.00 / 4.00</div>
@@ -242,7 +261,7 @@
           <div class="edu-date">Sep 2025 – Jun 2027</div>
           <div class="edu-courses"><b>Coursework:</b> Advanced Algorithms, NLP, Machine Learning, Reinforcement Learning</div>
         </div>
-        <div class="edu-card">
+        <div class="edu-card reveal reveal-delay-1">
           <div class="edu-top">
             <div><div class="edu-school">PES University</div><div class="edu-loc">Bangalore, India</div></div>
           </div>
@@ -257,14 +276,14 @@
       <div class="section-header"><h2>💼 Experience</h2><p>2+ years of impact across cloud systems and ML</p></div>
       
       <div class="snapshot-grid">
-        <div class="snapshot"><div class="snapshot-val" style="color:var(--accent)">25%</div><div class="snapshot-label">Availability Improvement</div></div>
-        <div class="snapshot"><div class="snapshot-val" style="color:var(--accent2)">15+</div><div class="snapshot-label">Global Regions</div></div>
-        <div class="snapshot"><div class="snapshot-val" style="color:var(--accent3)">99%</div><div class="snapshot-label">Execution Success</div></div>
-        <div class="snapshot"><div class="snapshot-val">5+</div><div class="snapshot-label">Features Delivered</div></div>
+        <div class="snapshot reveal"><div class="snapshot-val" style="color:var(--accent)">25%</div><div class="snapshot-label">Availability Improvement</div></div>
+        <div class="snapshot reveal reveal-delay-1"><div class="snapshot-val" style="color:var(--accent2)">15+</div><div class="snapshot-label">Global Regions</div></div>
+        <div class="snapshot reveal reveal-delay-2"><div class="snapshot-val" style="color:var(--accent3)">99%</div><div class="snapshot-label">Execution Success</div></div>
+        <div class="snapshot reveal reveal-delay-3"><div class="snapshot-val">5+</div><div class="snapshot-label">Features Delivered</div></div>
       </div>
 
       <div class="exp-timeline">
-        <div class="exp-card featured">
+        <div class="exp-card featured reveal">
           <div class="exp-header">
             <div><div class="exp-role">Software Developer (SDE-2)</div><div class="exp-company">IBM Cloud</div></div>
             <div class="exp-meta"><div class="exp-date">Jun 2023 – Jul 2025</div><div class="exp-loc">Bangalore, India</div></div>
@@ -281,7 +300,7 @@
           </div>
         </div>
 
-        <div class="exp-card">
+        <div class="exp-card reveal">
           <div class="exp-header">
             <div><div class="exp-role">Software Engineer Intern</div><div class="exp-company">IBM</div></div>
             <div class="exp-meta"><div class="exp-date">Jan 2023 – Jun 2023</div><div class="exp-loc">Bangalore, India</div></div>
@@ -293,7 +312,7 @@
           <div class="exp-tags"><span class="exp-tag">Python</span><span class="exp-tag">LSTM</span><span class="exp-tag">ARIMA</span><span class="exp-tag">Grafana</span></div>
         </div>
 
-        <div class="exp-card">
+        <div class="exp-card reveal">
           <div class="exp-header">
             <div><div class="exp-role">Software Engineer Intern</div><div class="exp-company">Pthinks Pvt. Ltd</div></div>
             <div class="exp-meta"><div class="exp-date">May 2022 – Aug 2022</div><div class="exp-loc">Bangalore, India</div></div>
@@ -310,7 +329,8 @@
     <section id="projects">
       <div class="section-header"><h2>🚀 Featured Projects</h2><p>Research-driven ML projects with measurable results</p></div>
       <div class="project-grid">
-        <div class="project-card">
+        <div class="project-card tilt-card reveal">
+          <div class="tilt-content">
           <div class="project-icon">📈</div>
           <a class="project-title" href="https://github.com/Shreepoorna1903/News-Sentiment-Analysis-for-Predicting-Next-Day-Stock-Movements" target="_blank">News Sentiment → Stock Prediction</a>
           <div class="tags"><span class="tag">FinBERT</span><span class="tag">VADER</span><span class="tag">PyTorch</span><span class="tag">HuggingFace</span></div>
@@ -320,24 +340,29 @@
             <a class="btn btn-ghost btn-sm" href="https://github.com/Shreepoorna1903/News-Sentiment-Analysis-for-Predicting-Next-Day-Stock-Movements" target="_blank">Repo</a>
             <a class="btn btn-ghost btn-sm" href="https://github.com/Shreepoorna1903/News-Sentiment-Analysis-for-Predicting-Next-Day-Stock-Movements/blob/main/report/Final_Report_CS6120.pdf" target="_blank">Report</a>
           </div>
+          </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card tilt-card reveal reveal-delay-1">
+          <div class="tilt-content">
           <div class="project-icon">🧠</div>
           <a class="project-title" href="https://github.com/Shreepoorna1903/Probing-Transformer-Representations-for-Named-Entity-Recognition-NER-" target="_blank">BERT Layer Probing for NER</a>
           <div class="tags"><span class="tag">BERT</span><span class="tag">CoNLL-2003</span><span class="tag">PyTorch</span><span class="tag">Probing</span></div>
           <p class="project-desc">Layerwise probing of frozen BERT (100M params) analyzing NER encoding across 13 layers with 10-fold CV on 12K+ embeddings.</p>
           <div class="project-metrics"><span class="metric"><b>97.35%</b> accuracy (L11)</span><span class="metric"><b>12K+</b> embeddings</span><span class="metric"><b>13</b> layers</span></div>
           <div class="project-links"><a class="btn btn-ghost btn-sm" href="https://github.com/Shreepoorna1903/Probing-Transformer-Representations-for-Named-Entity-Recognition-NER-" target="_blank">Repo</a></div>
+          </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card tilt-card reveal reveal-delay-2">
+          <div class="tilt-content">
           <div class="project-icon">🧬</div>
           <a class="project-title" href="https://github.com/Shreepoorna1903/Advanced-Melanoma-Skin-Cancer-Detection-with-Deep-Learning" target="_blank">Melanoma Detection CNN</a>
           <div class="tags"><span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">CNN</span><span class="tag">Medical AI</span></div>
           <p class="project-desc">26.3M parameter CNN for 9-class melanoma classification with augmentation addressing class imbalance.</p>
           <div class="project-metrics"><span class="metric"><b>97%</b> accuracy</span><span class="metric"><b>26.3M</b> params</span><span class="metric"><b>9</b> classes</span></div>
           <div class="project-links"><a class="btn btn-ghost btn-sm" href="https://github.com/Shreepoorna1903/Advanced-Melanoma-Skin-Cancer-Detection-with-Deep-Learning" target="_blank">Repo</a></div>
+          </div>
         </div>
       </div>
     </section>
@@ -345,13 +370,13 @@
     <section id="skills">
       <div class="section-header"><h2>🛠 Technical Skills</h2><p>Comprehensive stack across ML, systems, and cloud</p></div>
       <div class="skills-section">
-        <div class="skill-group">
+        <div class="skill-group reveal">
           <h3><span>💻</span> Languages & ML</h3>
           <div class="skill-list">
             <span class="skill strong">Python</span><span class="skill strong">C++</span><span class="skill">Go</span><span class="skill">C</span><span class="skill">NumPy</span><span class="skill">Matplotlib</span><span class="skill strong">PyTorch</span><span class="skill">TensorFlow</span><span class="skill">Keras</span><span class="skill strong">HuggingFace</span><span class="skill">Scikit-learn</span><span class="skill strong">NLP</span>
           </div>
         </div>
-        <div class="skill-group">
+        <div class="skill-group reveal reveal-delay-1">
           <h3><span>☁️</span> Systems, Cloud & DevOps</h3>
           <div class="skill-list">
             <span class="skill strong">Docker</span><span class="skill strong">Kubernetes</span><span class="skill">Microservices</span><span class="skill">gRPC</span><span class="skill">REST APIs</span><span class="skill">CI/CD</span><span class="skill">Linux</span><span class="skill">Bash</span><span class="skill">Distributed Systems</span><span class="skill">SQL</span><span class="skill">NoSQL</span><span class="skill">Git</span><span class="skill">Prometheus</span><span class="skill">Grafana</span>
@@ -363,19 +388,19 @@
     <section id="contact">
       <div class="section-header"><h2>📬 Get in Touch</h2><p>Open to AI/ML and systems engineering opportunities</p></div>
       <div class="contact-grid">
-        <a class="contact-card" href="mailto:purohit.shr@northeastern.edu">
+        <a class="contact-card reveal" href="mailto:purohit.shr@northeastern.edu">
           <div class="contact-icon">✉️</div>
           <div><div class="contact-label">Email</div><div class="contact-value">purohit.shr@northeastern.edu</div></div>
         </a>
-        <a class="contact-card" href="tel:+18572631664">
+        <a class="contact-card reveal reveal-delay-1" href="tel:+18572631664">
           <div class="contact-icon">📱</div>
           <div><div class="contact-label">Phone</div><div class="contact-value">+1 (857) 263-1664</div></div>
         </a>
-        <a class="contact-card" href="https://www.linkedin.com/in/shreepoorna-dp-870737192" target="_blank">
+        <a class="contact-card reveal reveal-delay-2" href="https://www.linkedin.com/in/shreepoorna-dp-870737192" target="_blank">
           <div class="contact-icon">💼</div>
           <div><div class="contact-label">LinkedIn</div><div class="contact-value">shreepoorna-dp-870737192</div></div>
         </a>
-        <a class="contact-card" href="https://github.com/Shreepoorna1903" target="_blank">
+        <a class="contact-card reveal reveal-delay-3" href="https://github.com/Shreepoorna1903" target="_blank">
           <div class="contact-icon">🐙</div>
           <div><div class="contact-label">GitHub</div><div class="contact-value">Shreepoorna1903</div></div>
         </a>
@@ -386,6 +411,7 @@
   <footer><div class="container">Built with precision · © <span id="year"></span> Shreepoorna Purohit</div></footer>
 
   <script>
+    // Typing animation
     const phrases=["AI/ML","NLP","Cloud Systems","Deep Learning"];
     const el=document.getElementById("typed");
     let pi=0,ci=0,del=false;
@@ -397,6 +423,122 @@
     }
     type();
     document.getElementById("year").textContent=new Date().getFullYear();
+
+    // Scroll Progress Bar
+    const progressBar=document.getElementById('progress');
+    window.addEventListener('scroll',()=>{
+      const scrollTop=document.documentElement.scrollTop;
+      const scrollHeight=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+      const progress=(scrollTop/scrollHeight)*100;
+      progressBar.style.width=progress+'%';
+    },{passive:true});
+
+    // Animated Background Canvas
+    const canvas=document.getElementById('bg-canvas');
+    const ctx=canvas.getContext('2d');
+    let w,h,particles=[];
+    let mouseX=0,mouseY=0;
+    
+    function resize(){
+      w=canvas.width=window.innerWidth;
+      h=canvas.height=window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize',resize);
+    
+    document.addEventListener('mousemove',e=>{
+      mouseX=e.clientX;
+      mouseY=e.clientY;
+    });
+    
+    class Particle{
+      constructor(){
+        this.reset();
+      }
+      reset(){
+        this.x=Math.random()*w;
+        this.y=Math.random()*h;
+        this.vx=(Math.random()-.5)*.3;
+        this.vy=(Math.random()-.5)*.3;
+        this.r=Math.random()*2+1;
+        this.alpha=Math.random()*.5+.2;
+      }
+      update(){
+        const dx=mouseX-this.x;
+        const dy=mouseY-this.y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<150){
+          this.vx-=dx*.00008;
+          this.vy-=dy*.00008;
+        }
+        this.x+=this.vx;
+        this.y+=this.vy;
+        if(this.x<0||this.x>w||this.y<0||this.y>h)this.reset();
+      }
+      draw(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(139,92,246,${this.alpha})`;
+        ctx.fill();
+      }
+    }
+    
+    for(let i=0;i<60;i++)particles.push(new Particle());
+    
+    function drawLines(){
+      for(let i=0;i<particles.length;i++){
+        for(let j=i+1;j<particles.length;j++){
+          const dx=particles[i].x-particles[j].x;
+          const dy=particles[i].y-particles[j].y;
+          const dist=Math.sqrt(dx*dx+dy*dy);
+          if(dist<120){
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x,particles[i].y);
+            ctx.lineTo(particles[j].x,particles[j].y);
+            ctx.strokeStyle=`rgba(139,92,246,${.15*(1-dist/120)})`;
+            ctx.lineWidth=1;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+    
+    function animate(){
+      ctx.clearRect(0,0,w,h);
+      particles.forEach(p=>{p.update();p.draw()});
+      drawLines();
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Scroll Reveal
+    const revealEls=document.querySelectorAll('.reveal');
+    const revealObserver=new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    },{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+    revealEls.forEach(el=>revealObserver.observe(el));
+
+    // Card Tilt Effect
+    const tiltCards=document.querySelectorAll('.tilt-card');
+    tiltCards.forEach(card=>{
+      card.addEventListener('mousemove',e=>{
+        const rect=card.getBoundingClientRect();
+        const x=e.clientX-rect.left;
+        const y=e.clientY-rect.top;
+        const centerX=rect.width/2;
+        const centerY=rect.height/2;
+        const rotateX=(y-centerY)/12;
+        const rotateY=(centerX-x)/12;
+        card.style.transform=`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02,1.02,1.02)`;
+      });
+      card.addEventListener('mouseleave',()=>{
+        card.style.transform='perspective(1000px) rotateX(0) rotateY(0) scale3d(1,1,1)';
+      });
+    });
 
     // Sliding nav indicator
     const indicator=document.querySelector('.nav-indicator');
@@ -434,7 +576,6 @@
       if(active)moveIndicator(active);
     });
     
-    // Initialize
     setTimeout(updateActiveSection,100);
   </script>
 </body>
