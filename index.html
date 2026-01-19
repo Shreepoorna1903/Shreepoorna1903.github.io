@@ -19,9 +19,9 @@
       --muted: rgba(232,236,255,0.72);
       --muted2: rgba(232,236,255,0.55);
 
-      --accent:#7c3aed;   /* violet */
-      --accent2:#22d3ee;  /* cyan */
-      --accent3:#f97316;  /* orange */
+      --accent:#7c3aed;
+      --accent2:#22d3ee;
+      --accent3:#f97316;
 
       --shadow: 0 18px 60px rgba(0,0,0,.45);
       --shadow2: 0 14px 40px rgba(0,0,0,.30);
@@ -31,13 +31,12 @@
       --ease: cubic-bezier(.2,.8,.2,1);
     }
 
-    *{ box-sizing:border-box; }
+    *{ box-sizing:border-box; margin:0; padding:0; }
     html,body{ height:100%; }
     html{ scroll-behavior:smooth; }
     body{
-      margin:0;
       color:var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background:
         radial-gradient(900px 650px at 10% 8%, rgba(124,58,237,.32), transparent 60%),
         radial-gradient(900px 650px at 92% 22%, rgba(34,211,238,.22), transparent 55%),
@@ -46,9 +45,9 @@
       overflow-x:hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
     }
 
-    /* subtle noise (lighter + smoother) */
     body::before{
       content:"";
       position:fixed; inset:0;
@@ -58,7 +57,6 @@
       opacity:.14;
     }
 
-    /* animated aurora blobs */
     .blob{
       position:fixed;
       width:520px; height:520px;
@@ -89,7 +87,6 @@
       100%{ transform: translate3d(0,0,0) scale(1); }
     }
 
-    /* particles canvas */
     #fx{
       position:fixed; inset:0;
       z-index:-2;
@@ -99,10 +96,9 @@
     .wrap{
       max-width: var(--max);
       margin: 0 auto;
-      padding: 22px 18px 84px;
+      padding: 80px 24px;
     }
 
-    /* ---------- Glass UI primitives ---------- */
     .glass{
       border:1px solid var(--stroke);
       background: linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035));
@@ -110,559 +106,596 @@
       backdrop-filter: blur(12px);
       border-radius: var(--radius);
     }
-    .glass.soft{
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
-      box-shadow: 0 10px 34px rgba(0,0,0,.24);
-    }
 
-    .pad{ padding: 22px; }
-
-    .divider{
-      height:1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
-      margin: 26px 0;
-    }
-
-    /* top nav */
     .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding: 10px 12px;
-      position: sticky;
-      top: 14px;
-      z-index: 10;
-      border-radius: 999px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(6,7,11,0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 16px 0;
+    }
+
+    .nav-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
     }
 
     .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width: 200px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.3px;
     }
+
     .dot{
-      width:12px; height:12px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #fff, rgba(255,255,255,0) 45%),
-                  linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 24px rgba(124,58,237,.45);
-    }
-    .brand span{
-      font-weight: 740;
-      letter-spacing: .2px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 20px rgba(124,58,237,.5);
     }
 
     .navlinks{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content:center;
+      display: flex;
+      gap: 8px;
     }
 
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 9px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,0.04);
+    .navlinks a{
+      color: var(--muted);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s var(--ease);
+    }
+
+    .navlinks a:hover{
       color: var(--text);
-      text-decoration:none;
-      font-size: 13px;
-      transition: transform .18s var(--ease), background .18s var(--ease), border-color .18s var(--ease);
-      white-space: nowrap;
-      max-width: 100%;
-    }
-    .pill:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(255,255,255,0.20);
+      background: rgba(255,255,255,0.05);
     }
 
-    .cta{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:flex-end;
-      min-width: 200px;
+    .hero{
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+
+    .badge{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(124,58,237,0.15);
+      border: 1px solid rgba(124,58,237,0.3);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .status-dot{
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22d3ee;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse{
+      0%, 100%{ opacity: 1; }
+      50%{ opacity: 0.5; }
+    }
+
+    h1{
+      font-size: clamp(40px, 5vw, 60px);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    .gradient-text{
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle{
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      max-width: 600px;
+    }
+
+    .cta-buttons{
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
     }
 
     .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: linear-gradient(135deg, rgba(124,58,237,.32), rgba(34,211,238,.14));
-      color: var(--text);
-      text-decoration:none;
-      font-weight:650;
-      font-size: 13px;
-      box-shadow: 0 10px 28px rgba(0,0,0,.22);
-      transition: transform .18s var(--ease), filter .2s var(--ease);
-      white-space: nowrap;
-      max-width: 100%;
-    }
-    .btn:hover{ transform: translateY(-1px); filter: brightness(1.07); }
-
-    /* hero */
-    .hero{
-      margin-top: 18px;
-      display:grid;
-      grid-template-columns: 1.35fr .65fr;
-      gap: 18px;
-      align-items: start;
-    }
-
-    @media (max-width: 900px){
-      .hero{ grid-template-columns: 1fr; }
-      .cta{ min-width: auto; }
-      .brand{ min-width: auto; }
-    }
-
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.04);
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing:.2px;
-      margin-bottom: 12px;
-      width: fit-content;
-      max-width: 100%;
-      flex-wrap: wrap;
-    }
-    .kicker b{ color: var(--text); font-weight:740; }
-
-    h1{
-      margin: 0 0 10px;
-      font-size: clamp(34px, 4.2vw, 54px);
-      line-height: 1.06;
-      letter-spacing: -0.7px;
-      word-break: normal;
-    }
-
-    .sub{
-      margin: 0 0 14px;
-      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
       font-size: 15px;
-      line-height: 1.65;
-      max-width: 66ch;
-    }
-    .typed{
-      display:inline-block;
-      padding: 6px 10px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(0,0,0,0.18);
-      font-weight: 650;
-      color: rgba(232,236,255,0.92);
-    }
-    .cursor{
-      display:inline-block;
-      width: 8px;
-      margin-left: 6px;
-      opacity: 1;
-      animation: blink 1s step-end infinite;
-    }
-    @keyframes blink{ 50%{ opacity: 0; } }
-
-    .hero-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-    .slink{
-      font-size: 12px;
-      color: rgba(232,236,255,0.92);
-      text-decoration:none;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
-      padding: 9px 11px;
-      border-radius: 999px;
-      transition: transform .18s var(--ease), background .18s var(--ease), border-color .18s var(--ease);
-      white-space: nowrap;
-      max-width: 100%;
-    }
-    .slink:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(255,255,255,0.18);
+      text-decoration: none;
+      transition: all 0.3s var(--ease);
+      cursor: pointer;
     }
 
-    /* stats (left hero) */
-    .stats{
-      margin-top: 18px;
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+    .btn-primary{
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+      border: none;
+      box-shadow: 0 10px 30px rgba(124,58,237,0.3);
     }
-    @media (max-width: 560px){ .stats{ grid-template-columns: 1fr; } }
 
-    .stat{
-      border:1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
-      border-radius: 18px;
-      padding: 14px 14px;
-      transition: transform .18s var(--ease), background .18s var(--ease), border-color .18s var(--ease);
-      min-width:0;
-    }
-    .stat:hover{
+    .btn-primary:hover{
       transform: translateY(-2px);
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(255,255,255,0.20);
-    }
-    .stat .big{
-      font-weight: 820;
-      font-size: 18px;
-      letter-spacing: .2px;
-    }
-    .stat .small{
-      margin-top: 4px;
-      color: var(--muted2);
-      font-size: 12px;
-      line-height: 1.45;
+      box-shadow: 0 15px 40px rgba(124,58,237,0.4);
     }
 
-    /* right hero KPI card (friend-like) */
-    .kpiCardHeader{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom: 12px;
+    .btn-secondary{
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border: 1px solid var(--stroke);
     }
-    .avatar{
-      width: 38px; height: 38px;
-      border-radius: 12px;
-      display:grid; place-items:center;
-      font-weight: 820;
-      letter-spacing:.2px;
-      background: linear-gradient(135deg, rgba(124,58,237,.38), rgba(34,211,238,.18));
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow: 0 10px 25px rgba(0,0,0,.22);
-    }
-    .kpiTitle{ font-weight: 760; margin:0; font-size: 14px; }
-    .kpiSub{ margin:2px 0 0; color: var(--muted2); font-size: 12px; }
 
-    .kpiList{
-      display:flex;
-      flex-direction: column;
-      gap:10px;
-      margin-top: 10px;
+    .btn-secondary:hover{
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
     }
-    .kpiItem{
-      border: 1px solid rgba(255,255,255,0.12);
+
+    .stats-grid{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .stat-card{
+      padding: 20px;
       background: rgba(255,255,255,0.04);
+      border: 1px solid var(--stroke);
       border-radius: 16px;
-      padding: 12px 12px;
-      transition: transform .18s var(--ease), background .18s var(--ease), border-color .18s var(--ease);
-    }
-    .kpiItem:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,0.065);
-      border-color: rgba(255,255,255,0.18);
-    }
-    .kpiNum{
-      font-size: 18px;
-      font-weight: 860;
-      letter-spacing: .2px;
-    }
-    .kpiDesc{
-      margin-top: 4px;
-      color: var(--muted2);
-      font-size: 12px;
-      line-height: 1.45;
-    }
-    .kpiFooter{
-      display:flex;
-      justify-content: space-between;
-      gap:10px;
-      margin-top: 12px;
-      flex-wrap: wrap;
+      transition: all 0.3s var(--ease);
     }
 
-    /* Sections */
-    section{ margin-top: 22px; }
-    .sectionHead{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:12px;
-      margin: 28px 0 12px;
-      flex-wrap: wrap;
+    .stat-card:hover{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-4px);
     }
-    .sectionHead h2{
-      margin:0;
-      font-size: 18px;
-      letter-spacing: .2px;
+
+    .stat-number{
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
     }
-    .sectionHead p{
-      margin:0;
-      color: var(--muted2);
+
+    .stat-label{
       font-size: 13px;
+      color: var(--muted2);
       line-height: 1.5;
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    @media (max-width: 980px){ .grid{ grid-template-columns: 1fr; } }
-
-    .cardItem{
-      position:relative;
-      border:1px solid rgba(255,255,255,0.12);
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+    .profile-card{
+      padding: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid var(--stroke);
       border-radius: var(--radius);
-      padding: 16px 16px 14px;
-      overflow:hidden;
-      transform: translateY(10px);
-      opacity: 0;
-      transition: transform .8s var(--ease), opacity .8s var(--ease);
-      min-width:0;
-      box-shadow: 0 10px 30px rgba(0,0,0,.18);
     }
-    .cardItem.reveal{
-      transform: translateY(0);
-      opacity: 1;
-    }
-    .cardItem::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(520px 220px at 20% 0%, rgba(124,58,237,.18), transparent 60%),
-        radial-gradient(520px 220px at 90% 12%, rgba(34,211,238,.12), transparent 60%);
-      opacity:.9;
-      pointer-events:none;
-    }
-    .inner{ position:relative; z-index:1; min-width:0; }
 
-    .titleLink{
-      display:inline-block;
-      text-decoration:none;
-      color: var(--text);
-      font-weight: 780;
-      letter-spacing: .2px;
-      font-size: 15px;
-      margin-bottom: 8px;
-      word-break: break-word;
-      overflow-wrap: anywhere;
+    .profile-header{
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
     }
-    .titleLink:hover{ text-decoration: underline; }
+
+    .avatar{
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.4), rgba(34,211,238,0.2));
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 22px;
+      border: 2px solid rgba(255,255,255,0.15);
+    }
+
+    .profile-info h3{
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .profile-info p{
+      font-size: 13px;
+      color: var(--muted2);
+    }
+
+    .highlight-item{
+      padding: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      margin-bottom: 12px;
+      transition: all 0.3s var(--ease);
+    }
+
+    .highlight-item:hover{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.18);
+      transform: translateX(4px);
+    }
+
+    .highlight-number{
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .highlight-desc{
+      font-size: 13px;
+      color: var(--muted2);
+      line-height: 1.5;
+    }
+
+    section{
+      margin-bottom: 100px;
+    }
+
+    .section-header{
+      margin-bottom: 40px;
+    }
+
+    .section-header h2{
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 12px;
+    }
+
+    .section-header p{
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    .projects-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card{
+      padding: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      transition: all 0.4s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before{
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transition: transform 0.4s var(--ease);
+    }
+
+    .project-card:hover::before{
+      transform: scaleX(1);
+    }
+
+    .project-card:hover{
+      transform: translateY(-8px);
+      border-color: rgba(255,255,255,0.2);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+
+    .project-card h3{
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.3px;
+    }
+
+    .project-card h3 a{
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .project-card h3 a:hover{
+      color: var(--accent2);
+    }
 
     .tags{
-      display:flex;
-      flex-wrap:wrap;
+      display: flex;
+      flex-wrap: wrap;
       gap: 8px;
-      margin: 10px 0 10px;
+      margin: 16px 0;
     }
+
     .tag{
       font-size: 11px;
-      color: rgba(232,236,255,0.82);
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.16);
-      padding: 6px 8px;
-      border-radius: 999px;
-      white-space: nowrap;
-    }
-
-    .cardItem p{
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.65;
-      overflow-wrap:anywhere;
-    }
-
-    .links{
-      margin-top: 12px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    /* Experience list (friend-like wide cards) */
-    .stacked{
-      display:flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .expCard{
-      padding: 18px;
-    }
-    .expTop{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 8px;
-    }
-    .expRole{
-      margin:0;
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: .2px;
-    }
-    .expDate{
-      font-size: 12px;
-      color: rgba(232,236,255,0.72);
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
-      border-radius: 999px;
-      padding: 6px 10px;
-      white-space: nowrap;
-    }
-    .bullets{
-      margin: 10px 0 0;
-      padding-left: 16px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.7;
-    }
-    .bullets li{ margin: 6px 0; }
-
-    /* Skills blocks */
-    .skillGrid{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-    @media (max-width: 980px){ .skillGrid{ grid-template-columns: 1fr; } }
-
-    .skillCard{
-      padding: 16px;
-    }
-    .skillCard h3{
-      margin:0 0 6px;
-      font-size: 13px;
-      letter-spacing:.2px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: rgba(124,58,237,0.15);
+      border: 1px solid rgba(124,58,237,0.3);
       color: rgba(232,236,255,0.9);
-      text-transform: none;
-      font-weight: 780;
     }
-    .skillCard p{
-      margin:0;
+
+    .project-card p{
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .project-links{
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .project-link{
       font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--stroke);
+      transition: all 0.2s var(--ease);
+    }
+
+    .project-link:hover{
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    .experience-list{
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .exp-card{
+      padding: 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      transition: all 0.3s var(--ease);
+    }
+
+    .exp-card:hover{
+      border-color: rgba(255,255,255,0.2);
+      transform: translateX(8px);
+    }
+
+    .exp-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .exp-header h3{
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .exp-date{
+      font-size: 13px;
+      color: var(--muted2);
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--stroke);
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+
+    .exp-card ul{
+      list-style: none;
+      padding: 0;
+    }
+
+    .exp-card li{
+      padding-left: 24px;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .exp-card li::before{
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--accent2);
+      font-weight: 700;
+    }
+
+    .skills-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card{
+      padding: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--stroke);
+      border-radius: 16px;
+      transition: all 0.3s var(--ease);
+    }
+
+    .skill-card:hover{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-4px);
+    }
+
+    .skill-card h3{
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .skill-card p{
+      font-size: 14px;
       color: var(--muted2);
       line-height: 1.6;
     }
 
-    /* Contact table (friend-like) */
-    .contactTable{
-      border:1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
+    .contact-card{
+      padding: 40px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid var(--stroke);
       border-radius: var(--radius);
-      overflow:hidden;
     }
-    .contactRow{
-      display:flex;
-      justify-content:space-between;
-      gap: 14px;
-      padding: 14px 16px;
-      border-top: 1px solid rgba(255,255,255,0.10);
-      flex-wrap: wrap;
+
+    .contact-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
     }
-    .contactRow:first-child{ border-top:none; }
-    .contactKey{
-      color: rgba(232,236,255,0.70);
-      font-weight: 700;
+
+    .contact-item{
+      padding: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      transition: all 0.3s var(--ease);
+    }
+
+    .contact-item:hover{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .contact-label{
       font-size: 13px;
+      font-weight: 600;
+      color: var(--muted2);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    .contactVal a{
-      color: rgba(232,236,255,0.92);
-      text-decoration:none;
-      font-weight: 650;
-      font-size: 13px;
-      border-bottom: 1px solid rgba(255,255,255,0.0);
-      transition: border-color .18s var(--ease);
+
+    .contact-value a{
+      color: var(--text);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      transition: color 0.2s;
     }
-    .contactVal a:hover{
-      border-color: rgba(255,255,255,0.28);
+
+    .contact-value a:hover{
+      color: var(--accent2);
     }
 
     footer{
-      margin-top: 26px;
-      padding: 18px 0 0;
-      color: rgba(232,236,255,0.55);
-      font-size: 12px;
-      text-align:center;
+      text-align: center;
+      padding: 40px 0;
+      color: var(--muted2);
+      font-size: 14px;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
 
-    /* entrance animation */
     .fade-in{
-      opacity:0;
-      transform: translateY(10px);
-      animation: in .95s var(--ease) forwards;
-      will-change: transform, opacity;
-    }
-    .fade-in.d2{ animation-delay: .12s; }
-    .fade-in.d3{ animation-delay: .24s; }
-    @keyframes in{
-      to{ opacity:1; transform: translateY(0); }
-    }
-
-    /* sparkle hover */
-    .spark{
-      position:absolute;
-      width:220px; height:220px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.20), rgba(255,255,255,0) 55%);
-      filter: blur(18px);
       opacity: 0;
-      transform: translate(-50%,-50%);
-      pointer-events:none;
-      transition: opacity .25s var(--ease);
+      transform: translateY(20px);
+      animation: fadeIn 0.8s var(--ease) forwards;
     }
-    .cardItem:hover .spark{ opacity: .6; }
 
-    /* ---------- Mobile & Tablet ---------- */
-    @media (max-width: 860px){
-      .wrap{ padding: 18px 14px 62px; }
+    .fade-in.d1{ animation-delay: 0.1s; }
+    .fade-in.d2{ animation-delay: 0.2s; }
+    .fade-in.d3{ animation-delay: 0.3s; }
+    .fade-in.d4{ animation-delay: 0.4s; }
 
-      .nav{
-        position: relative;
-        top: auto;
+    @keyframes fadeIn{
+      to{
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 968px){
+      .hero{
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-grid{
+        grid-template-columns: 1fr;
+      }
+
+      h1{
+        font-size: 40px;
+      }
+
+      .wrap{
+        padding: 100px 20px 60px;
+      }
+
+      .nav-inner{
         flex-direction: column;
         align-items: stretch;
-        gap: 10px;
-        padding: 12px;
-        border-radius: 18px;
       }
-      .brand{ justify-content:center; }
-      .navlinks{ justify-content:center; }
-      .cta{
-        justify-content:center;
+
+      .brand{
+        justify-content: center;
+      }
+
+      .navlinks{
+        justify-content: center;
         flex-wrap: wrap;
-        min-width: auto;
       }
-
-      h1{ font-size: 34px; line-height: 1.12; }
-      h1 br{ display:none; }
-      .sub{ font-size: 14px; }
-
-      .blob{ width: 400px; height: 400px; filter: blur(46px); opacity: .18; }
-      #fx{ opacity: .40; }
     }
 
-    /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
-      html{ scroll-behavior: auto; }
-      .blob{ animation: none !important; }
-      .cursor{ animation: none !important; }
-      .fade-in{ animation: none !important; opacity:1; transform:none; }
-      .cardItem{ transition:none !important; opacity:1; transform:none; }
+      *{
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
@@ -673,366 +706,228 @@
   <div class="blob b2"></div>
   <div class="blob b3"></div>
 
-  <div class="wrap">
-    <!-- NAV -->
-    <div class="nav glass soft">
+  <nav class="nav">
+    <div class="nav-inner">
       <div class="brand">
         <div class="dot"></div>
         <span>Shreepoorna Purohit</span>
       </div>
-
       <div class="navlinks">
-        <a class="pill" href="#about">About</a>
-        <a class="pill" href="#experience">Experience</a>
-        <a class="pill" href="#projects">✨ Projects</a>
-        <a class="pill" href="#stack">🧰 Skills</a>
-        <a class="pill" href="#contact">📬 Contact</a>
-      </div>
-
-      <div class="cta">
-        <a class="btn" href="https://www.linkedin.com/in/shreepoorna-dp-870737192" target="_blank" rel="noreferrer">in LinkedIn</a>
-        <a class="btn" href="https://github.com/Shreepoorna1903" target="_blank" rel="noreferrer">↗ GitHub</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
       </div>
     </div>
+  </nav>
 
-    <!-- HERO -->
-    <div class="hero" id="about">
-      <!-- Left -->
-      <div class="glass">
-        <div class="pad">
-          <div class="fade-in" style="margin-bottom:12px;">
-            <div style="
-              display:inline-block;
-              padding:10px 14px;
-              border-radius:14px;
-              border:1px solid rgba(255,255,255,0.16);
-              background: linear-gradient(135deg, rgba(124,58,237,.28), rgba(34,211,238,.16));
-              font-weight:760;
-              letter-spacing:.2px;
-              margin-bottom:8px;
-            ">
-              🚀 Let’s Build the Future Together
-            </div>
-
-            <p style="
-              margin:0;
-              font-size:14px;
-              color:rgba(232,236,255,0.78);
-              max-width:68ch;
-              line-height:1.65;
-            ">
-              Open to <b>2026 Summer Internships</b>, research collaborations, and innovative projects
-              in <b>AI/ML</b> and <b>Full-Stack Engineering</b>.
-            </p>
+  <div class="wrap">
+    <section id="about">
+      <div class="hero">
+        <div>
+          <div class="badge fade-in">
+            <span class="status-dot"></span>
+            Open to 2026 Summer Internships
           </div>
 
-          <div class="kicker fade-in">
-            <b>M.S. CS @ Northeastern University</b> · Former SDE-2 @ IBM Cloud
-          </div>
-
-          <h1 class="fade-in d2">
-            Designing intelligent systems <br/>
-            with <span class="typed" id="typed"></span><span class="cursor">▍</span>
+          <h1 class="fade-in d1">
+            Designing intelligent systems with <span class="gradient-text">AI/ML</span>
           </h1>
 
-          <p class="sub fade-in d3">
-            I work at the intersection of <b>AI/ML</b>, <b>NLP</b>, and <b>Distributed Systems</b> — shipping reliable cloud backends and
-            research-driven ML projects with measurable results.
+          <p class="subtitle fade-in d2">
+            I work at the intersection of <strong>AI/ML</strong>, <strong>NLP</strong>, and <strong>Distributed Systems</strong> — shipping reliable cloud backends and research-driven ML projects with measurable results.
           </p>
 
-          <div class="hero-actions">
-            <!-- KEEP EXACT FILE/LINK -->
-            <a class="slink" href="resume/Shreepoorna_Resume_AiML.pdf" target="_blank">👁️ Preview Resume</a>
-            <a class="slink" href="resume/Shreepoorna_Resume_AiML.pdf" download>⬇️ Download Resume</a>
+          <div class="cta-buttons fade-in d3">
+            <a href="resume/Shreepoorna_Resume_AiML.pdf" target="_blank" class="btn btn-primary">View Resume</a>
+            <a href="#contact" class="btn btn-secondary">Get in Touch</a>
           </div>
 
-          <div class="stats">
-            <div class="stat">
-              <div class="big">4.00/4.00</div>
-              <div class="small">MSCS CGPA (Northeastern)</div>
+          <div class="stats-grid fade-in d4">
+            <div class="stat-card">
+              <div class="stat-number">4.00/4.00</div>
+              <div class="stat-label">MSCS CGPA (Northeastern)</div>
             </div>
-            <div class="stat">
-              <div class="big">15+ regions</div>
-              <div class="small">Cloud microservices deployed at IBM Cloud</div>
+            <div class="stat-card">
+              <div class="stat-number">15+ regions</div>
+              <div class="stat-label">Cloud microservices deployed at IBM</div>
             </div>
-            <div class="stat">
-              <div class="big">NLP + CV</div>
-              <div class="small">FinBERT, probing, melanoma detection</div>
+            <div class="stat-card">
+              <div class="stat-number">97%+</div>
+              <div class="stat-label">ML project accuracy across NLP/CV</div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Right -->
-      <div class="glass soft">
-        <div class="pad">
-          <div class="kpiCardHeader">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <div class="avatar">SP</div>
-              <div>
-                <p class="kpiTitle">Shreepoorna Purohit</p>
-                <p class="kpiSub">AI/ML · NLP · Distributed Systems</p>
-              </div>
+        <div class="profile-card fade-in d4">
+          <div class="profile-header">
+            <div class="avatar">SP</div>
+            <div class="profile-info">
+              <h3>Shreepoorna Purohit</h3>
+              <p>M.S. CS @ Northeastern · Former SDE-2 @ IBM Cloud</p>
             </div>
           </div>
 
-          <div class="kpiList">
-            <div class="kpiItem">
-              <div class="kpiNum">25%</div>
-              <div class="kpiDesc">Availability improvement via replication + reliability work (IBM Cloud)</div>
-            </div>
-            <div class="kpiItem">
-              <div class="kpiNum">15+ Regions</div>
-              <div class="kpiDesc">Services shipped across global cloud regions with observability + CI/CD</div>
-            </div>
-            <div class="kpiItem">
-              <div class="kpiNum">97%+</div>
-              <div class="kpiDesc">ML project results across NLP probing / melanoma detection experiments</div>
-            </div>
+          <div class="highlight-item">
+            <div class="highlight-number">25%</div>
+            <div class="highlight-desc">Availability improvement via replication + reliability work (IBM Cloud)</div>
           </div>
 
-          <div class="kpiFooter">
-            <a class="slink" href="#experience">View Experience →</a>
-            <a class="slink" href="#stack">View Skills →</a>
+          <div class="highlight-item">
+            <div class="highlight-number">15+ Regions</div>
+            <div class="highlight-desc">Services shipped across global cloud regions with observability + CI/CD</div>
           </div>
 
-          <div class="divider" style="margin:16px 0;"></div>
-
-          <p style="margin:0; color: var(--muted2); font-size: 13px; line-height:1.6;">
-            <b>Now:</b> expanding ML depth (NLP/RL) while leveraging real-world distributed systems experience.
-          </p>
+          <div class="highlight-item">
+            <div class="highlight-number">97%+</div>
+            <div class="highlight-desc">ML project results across NLP probing / melanoma detection experiments</div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- EXPERIENCE -->
     <section id="experience">
-      <div class="sectionHead">
-        <div>
-          <h2>Experience</h2>
-          <p>Impact-driven work across cloud systems and ML projects.</p>
-        </div>
+      <div class="section-header">
+        <h2>Experience</h2>
+        <p>Impact-driven work across cloud systems and ML projects</p>
       </div>
 
-      <!-- Keeping this concise; edit text freely (no links affected) -->
-      <div class="stacked">
-        <div class="glass soft expCard">
-          <div class="expTop">
-            <h3 class="expRole">IBM Cloud — Software Developer (SDE-2)</h3>
-            <div class="expDate">Jun 2023 – Jul 2025</div>
+      <div class="experience-list">
+        <div class="exp-card">
+          <div class="exp-header">
+            <h3>Software Developer (SDE-2) — IBM Cloud</h3>
+            <div class="exp-date">Jun 2023 – Jul 2025</div>
           </div>
-          <ul class="bullets">
-            <li>Built Go-based microservices for distributed storage with REST APIs, Docker, Kubernetes and global rollouts.</li>
-            <li>Improved availability via replication / reliability initiatives; strengthened CI/CD and observability (Grafana/Prometheus).</li>
-            <li>Owned production-grade workflows with idempotency, retries, and operational readiness.</li>
+          <ul>
+            <li>Built Go-based microservices for distributed storage with REST APIs, Docker, Kubernetes and global rollouts</li>
+            <li>Improved availability via replication/reliability initiatives; strengthened CI/CD and observability (Grafana/Prometheus)</li>
+            <li>Owned production-grade workflows with idempotency, retries, and operational readiness</li>
           </ul>
         </div>
 
-        <div class="glass soft expCard">
-          <div class="expTop">
-            <h3 class="expRole">Northeastern University — Graduate Student (M.S. CS)</h3>
-            <div class="expDate">Sep 2025 – Present</div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <h3>Graduate Student (M.S. CS) — Northeastern University</h3>
+            <div class="exp-date">Sep 2025 – Present</div>
           </div>
-          <ul class="bullets">
-            <li>Coursework and projects spanning Advanced Algorithms, NLP, ML, and Reinforcement Learning.</li>
-            <li>Hands-on ML experimentation: probing transformer representations, financial sentiment modeling, CV classification.</li>
+          <ul>
+            <li>Coursework and projects spanning Advanced Algorithms, NLP, ML, and Reinforcement Learning</li>
+            <li>Hands-on ML experimentation: probing transformer representations, financial sentiment modeling, CV classification</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- PROJECTS -->
     <section id="projects">
-      <div class="sectionHead">
-        <div>
-          <h2>✨ Featured Projects</h2>
-          <p>Click a card → repo / report / notebook</p>
-        </div>
+      <div class="section-header">
+        <h2>Featured Projects</h2>
+        <p>Selected projects highlighting engineering + ML depth</p>
       </div>
 
-      <div class="grid">
-        <div class="cardItem" data-tilt>
-          <div class="spark"></div>
-          <div class="inner">
-            <a class="titleLink" target="_blank" rel="noreferrer"
-               href="https://github.com/Shreepoorna1903/News-Sentiment-Analysis-for-Predicting-Next-Day-Stock-Movements">
-              📈 News Sentiment → Next-Day Stock Movement
-            </a>
-            <div class="tags">
-              <span class="tag">FinBERT</span>
-              <span class="tag">VADER</span>
-              <span class="tag">Transformers</span>
-              <span class="tag">Long-doc chunking</span>
-            </div>
-            <p>
-              NLP pipeline on financial news to predict next-day movement with noise-aware labeling and GPU fine-tuning.
-            </p>
-            <div class="links">
-              <a class="slink" target="_blank" rel="noreferrer"
-                 href="https://github.com/Shreepoorna1903/News-Sentiment-Analysis-for-Predicting-Next-Day-Stock-Movements">Repo</a>
-              <a class="slink" target="_blank" rel="noreferrer"
-                 href="https://github.com/Shreepoorna1903/News-Sentiment-Analysis-for-Predicting-Next-Day-Stock-Movements/blob/main/report/Final_Report_CS6120.pdf">Report</a>
-              <a class="slink" target="_blank" rel="noreferrer"
-                 href="https://github.com/Shreepoorna1903/News-Sentiment-Analysis-for-Predicting-Next-Day-Stock-Movements/blob/main/notebook/NLP_Project.ipynb">Notebook</a>
-            </div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3><a href="https://github.com/Shreepoorna1903/News-Sentiment-Analysis-for-Predicting-Next-Day-Stock-Movements" target="_blank" rel="noreferrer">📈 News Sentiment → Next-Day Stock Movement</a></h3>
+          <div class="tags">
+            <span class="tag">FinBERT</span>
+            <span class="tag">VADER</span>
+            <span class="tag">Transformers</span>
+            <span class="tag">Long-doc chunking</span>
+          </div>
+          <p>NLP pipeline on financial news to predict next-day movement with noise-aware labeling and GPU fine-tuning</p>
+          <div class="project-links">
+            <a href="https://github.com/Shreepoorna1903/News-Sentiment-Analysis-for-Predicting-Next-Day-Stock-Movements" target="_blank" rel="noreferrer" class="project-link">View Repo</a>
+            <a href="https://github.com/Shreepoorna1903/News-Sentiment-Analysis-for-Predicting-Next-Day-Stock-Movements/blob/main/report/Final_Report_CS6120.pdf" target="_blank" rel="noreferrer" class="project-link">Report</a>
           </div>
         </div>
 
-        <div class="cardItem" data-tilt>
-          <div class="spark"></div>
-          <div class="inner">
-            <a class="titleLink" target="_blank" rel="noreferrer"
-               href="https://github.com/Shreepoorna1903/Probing-Transformer-Representations-for-Named-Entity-Recognition-NER-">
-              🧠 Layer-wise Probing of BERT for NER
-            </a>
-            <div class="tags">
-              <span class="tag">BERT</span>
-              <span class="tag">CoNLL-2003</span>
-              <span class="tag">Probing</span>
-              <span class="tag">Interpretability</span>
-            </div>
-            <p>
-              Probed frozen BERT layers to locate where semantic signals emerge; peak <b>97.35% token-level accuracy</b>.
-            </p>
-            <div class="links">
-              <a class="slink" target="_blank" rel="noreferrer"
-                 href="https://github.com/Shreepoorna1903/Probing-Transformer-Representations-for-Named-Entity-Recognition-NER-">Repo</a>
-            </div>
+        <div class="project-card">
+          <h3><a href="https://github.com/Shreepoorna1903/Probing-Transformer-Representations-for-Named-Entity-Recognition-NER-" target="_blank" rel="noreferrer">🧠 Layer-wise Probing of BERT for NER</a></h3>
+          <div class="tags">
+            <span class="tag">BERT</span>
+            <span class="tag">CoNLL-2003</span>
+            <span class="tag">Probing</span>
+            <span class="tag">Interpretability</span>
+          </div>
+          <p>Probed frozen BERT layers to locate where semantic signals emerge; peak 97.35% token-level accuracy</p>
+          <div class="project-links">
+            <a href="https://github.com/Shreepoorna1903/Probing-Transformer-Representations-for-Named-Entity-Recognition-NER-" target="_blank" rel="noreferrer" class="project-link">View Repo</a>
           </div>
         </div>
 
-        <div class="cardItem" data-tilt>
-          <div class="spark"></div>
-          <div class="inner">
-            <a class="titleLink" target="_blank" rel="noreferrer"
-               href="https://github.com/Shreepoorna1903/Advanced-Melanoma-Skin-Cancer-Detection-with-Deep-Learning">
-              🧬 Melanoma Skin Cancer Detection (CNN)
-            </a>
-            <div class="tags">
-              <span class="tag">TensorFlow</span>
-              <span class="tag">Keras</span>
-              <span class="tag">Medical Imaging</span>
-              <span class="tag">Augmentation</span>
-            </div>
-            <p>
-              Multi-class skin lesion classification with augmentation + class balancing to improve generalization.
-            </p>
-            <div class="links">
-              <a class="slink" target="_blank" rel="noreferrer"
-                 href="https://github.com/Shreepoorna1903/Advanced-Melanoma-Skin-Cancer-Detection-with-Deep-Learning">Repo</a>
-            </div>
+        <div class="project-card">
+          <h3><a href="https://github.com/Shreepoorna1903/Advanced-Melanoma-Skin-Cancer-Detection-with-Deep-Learning" target="_blank" rel="noreferrer">🧬 Melanoma Skin Cancer Detection (CNN)</a></h3>
+          <div class="tags">
+            <span class="tag">TensorFlow</span>
+            <span class="tag">Keras</span>
+            <span class="tag">Medical Imaging</span>
+            <span class="tag">Augmentation</span>
+          </div>
+          <p>Multi-class skin lesion classification with augmentation + class balancing to improve generalization</p>
+          <div class="project-links">
+            <a href="https://github.com/Shreepoorna1903/Advanced-Melanoma-Skin-Cancer-Detection-with-Deep-Learning" target="_blank" rel="noreferrer" class="project-link">View Repo</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- RESUME -->
-    <section id="resume">
-      <div class="sectionHead">
-        <div>
-          <h2>📄 Resume</h2>
-          <p>Preview or download</p>
-        </div>
+    <section id="skills">
+      <div class="section-header">
+        <h2>Skills</h2>
+        <p>A snapshot of what I use to build and ship ML + systems projects</p>
       </div>
 
-      <div class="grid">
-        <div class="cardItem">
-          <div class="inner">
-            <a class="titleLink" href="resume/Shreepoorna_Resume_AiML.pdf" target="_blank">
-              Shreepoorna Purohit — Resume
-            </a>
-
-            <div class="tags">
-              <span class="tag">AI / ML</span>
-              <span class="tag">NLP</span>
-              <span class="tag">Distributed Systems</span>
-              <span class="tag">IBM Cloud</span>
-            </div>
-
-            <p>
-              M.S. Computer Science student with industry experience at IBM Cloud, focused on
-              machine learning, NLP, and large-scale distributed systems.
-            </p>
-
-            <div class="links">
-              <a class="slink" href="resume/Shreepoorna_Resume_AiML.pdf" target="_blank">👁️ Preview</a>
-              <a class="slink" href="resume/Shreepoorna_Resume_AiML.pdf" download>⬇️ Download</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="stack">
-      <div class="sectionHead">
-        <div>
-          <h2>🧰 Skills</h2>
-          <p>A snapshot of what I use to build and ship ML + systems projects.</p>
-        </div>
-      </div>
-
-      <div class="skillGrid">
-        <div class="glass soft skillCard">
+      <div class="skills-grid">
+        <div class="skill-card">
           <h3>Languages</h3>
           <p>Python, C++, Go, SQL</p>
         </div>
-
-        <div class="glass soft skillCard">
+        <div class="skill-card">
           <h3>ML / NLP</h3>
           <p>PyTorch, TensorFlow, Transformers, scikit-learn</p>
         </div>
-
-        <div class="glass soft skillCard">
+        <div class="skill-card">
           <h3>Systems / Cloud</h3>
           <p>Docker, Kubernetes, Linux, CI/CD, Observability</p>
         </div>
-
-        <div class="glass soft skillCard">
+        <div class="skill-card">
           <h3>Practices</h3>
           <p>Reliable services, idempotent workflows, reproducible experiments</p>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT -->
     <section id="contact">
-      <div class="sectionHead">
-        <div>
-          <h2>Contact</h2>
-          <p>If you’re hiring for AI/ML or systems roles, I’d love to connect.</p>
-        </div>
+      <div class="section-header">
+        <h2>Contact</h2>
+        <p>If you're hiring for AI/ML or systems roles, I'd love to connect</p>
       </div>
 
-      <div class="contactTable glass soft">
-        <div class="contactRow">
-          <div class="contactKey">Email</div>
-          <div class="contactVal">
-            <a href="mailto:purohit.shr@northeastern.edu">purohit.shr@northeastern.edu</a>
+      <div class="contact-card">
+        <div class="contact-grid">
+          <div class="contact-item">
+            <div class="contact-label">Email</div>
+            <div class="contact-value">
+              <a href="mailto:purohit.shr@northeastern.edu">purohit.shr@northeastern.edu</a>
+            </div>
           </div>
-        </div>
-        <div class="contactRow">
-          <div class="contactKey">LinkedIn</div>
-          <div class="contactVal">
-            <a href="https://www.linkedin.com/in/shreepoorna-dp-870737192" target="_blank" rel="noreferrer">
-              linkedin.com/in/shreepoorna-dp-870737192
-            </a>
+          <div class="contact-item">
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">
+              <a href="https://www.linkedin.com/in/shreepoorna-dp-870737192" target="_blank" rel="noreferrer">linkedin.com/in/shreepoorna-dp</a>
+            </div>
           </div>
-        </div>
-        <div class="contactRow">
-          <div class="contactKey">GitHub</div>
-          <div class="contactVal">
-            <a href="https://github.com/Shreepoorna1903" target="_blank" rel="noreferrer">
-              github.com/Shreepoorna1903
-            </a>
+          <div class="contact-item">
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value">
+              <a href="https://github.com/Shreepoorna1903" target="_blank" rel="noreferrer">github.com/Shreepoorna1903</a>
+            </div>
           </div>
-        </div>
-        <div class="contactRow">
-          <div class="contactKey">Resume</div>
-          <div class="contactVal">
-            <a href="resume/Shreepoorna_Resume_AiML.pdf" target="_blank" rel="noreferrer">
-              resume/Shreepoorna_Resume_AiML.pdf
-            </a>
+          <div class="contact-item">
+            <div class="contact-label">Resume</div>
+            <div class="contact-value">
+              <a href="resume/Shreepoorna_Resume_AiML.pdf" target="_blank" rel="noreferrer">Download PDF</a>
+            </div>
           </div>
         </div>
       </div>
@@ -1044,86 +939,8 @@
   </div>
 
   <script>
-    // typed headline (same behavior, slightly smoother pacing)
-    const phrases = [
-      "AI/ML ✨",
-      "NLP 🧠",
-      "Distributed Systems ⚙️"
-    ];
-    const el = document.getElementById("typed");
-    let pi = 0, ci = 0, deleting = false;
-
-    const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    function typeLoop(){
-      if(prefersReduced){
-        el.textContent = phrases[0];
-        return;
-      }
-      const current = phrases[pi];
-      if(!deleting){
-        ci++;
-        el.textContent = current.slice(0, ci);
-        if(ci >= current.length){
-          deleting = true;
-          setTimeout(typeLoop, 950);
-          return;
-        }
-      } else {
-        ci--;
-        el.textContent = current.slice(0, ci);
-        if(ci <= 0){
-          deleting = false;
-          pi = (pi + 1) % phrases.length;
-        }
-      }
-      setTimeout(typeLoop, deleting ? 34 : 52);
-    }
-    typeLoop();
-
-    // year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // scroll reveal
-    const cards = document.querySelectorAll(".cardItem");
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting) e.target.classList.add("reveal");
-      });
-    }, { threshold: 0.12 });
-    cards.forEach(c=>io.observe(c));
-
-    // sparkle follows mouse on cards
-    document.querySelectorAll(".cardItem").forEach(card=>{
-      const spark = card.querySelector(".spark");
-      if(!spark) return;
-      card.addEventListener("mousemove", (e)=>{
-        const r = card.getBoundingClientRect();
-        const x = e.clientX - r.left;
-        const y = e.clientY - r.top;
-        spark.style.left = x + "px";
-        spark.style.top = y + "px";
-      });
-    });
-
-    // subtle 3D tilt (disable on mobile/reduced motion)
-    const canTilt = !prefersReduced && window.innerWidth >= 900;
-    if(canTilt){
-      document.querySelectorAll("[data-tilt]").forEach(card=>{
-        const max = 6;
-        card.addEventListener("mousemove", (e)=>{
-          const r = card.getBoundingClientRect();
-          const x = (e.clientX - r.left) / r.width - 0.5;
-          const y = (e.clientY - r.top) / r.height - 0.5;
-          card.style.transform = `rotateX(${(-y*max)}deg) rotateY(${(x*max)}deg) translateY(0px)`;
-        });
-        card.addEventListener("mouseleave", ()=>{
-          card.style.transform = "";
-        });
-      });
-    }
-
-    // particle background (more stable FPS + fewer links)
     const canvas = document.getElementById("fx");
     const ctx = canvas.getContext("2d");
     let w, h, dpr;
@@ -1138,6 +955,8 @@
     window.addEventListener("resize", resize);
     resize();
 
+    const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     if(!prefersReduced){
       const N = window.innerWidth < 600 ? 34 : 58;
       const pts = Array.from({length:N}, ()=>({
@@ -1150,7 +969,7 @@
 
       let last = performance.now();
       function step(now){
-        const dt = Math.min(32, now - last); // clamp
+        const dt = Math.min(32, now - last);
         last = now;
 
         ctx.clearRect(0,0,w,h);
@@ -1171,7 +990,6 @@
           ctx.fillStyle = "rgba(232,236,255,0.50)";
           ctx.fill();
 
-          // fewer link checks for perf: only nearby indices
           for(let j=i+1;j<Math.min(N, i+14);j++){
             const b = pts[j];
             const dx = a.x - b.x;
