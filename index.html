@@ -29,8 +29,12 @@
     .logo{font-weight:700;font-size:17px;display:flex;align-items:center;gap:10px}
     .logo-dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2))}
     .nav-links{display:flex;gap:6px;flex-wrap:wrap}
-    .nav-link{color:var(--text-muted);font-size:13px;text-decoration:none;padding:8px 14px;border-radius:6px;transition:all .2s}
-    .nav-link:hover{color:var(--text);background:var(--card)}
+    .nav-links{position:relative}
+    .nav-indicator{position:absolute;height:34px;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);border-radius:6px;transition:all .3s cubic-bezier(.4,0,.2,1);pointer-events:none;opacity:0}
+    .nav-indicator.visible{opacity:1}
+    .nav-link{color:var(--text-muted);font-size:13px;text-decoration:none;padding:8px 14px;border-radius:6px;transition:color .2s;position:relative;z-index:1}
+    .nav-link:hover{color:var(--text)}
+    .nav-link.active{color:var(--text)}
     .nav-cta{display:flex;gap:8px}
     .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;font-size:13px;font-weight:600;border-radius:8px;text-decoration:none;transition:all .2s;border:1px solid var(--border)}
     .btn-ghost{color:var(--text);background:transparent}
@@ -177,12 +181,13 @@
     <div class="container nav-inner">
       <div class="logo"><div class="logo-dot"></div>Shreepoorna Purohit</div>
       <div class="nav-links">
-        <a class="nav-link" href="#about">About</a>
-        <a class="nav-link" href="#education">Education</a>
-        <a class="nav-link" href="#experience">Experience</a>
-        <a class="nav-link" href="#projects">Projects</a>
-        <a class="nav-link" href="#skills">Skills</a>
-        <a class="nav-link" href="#contact">Contact</a>
+        <div class="nav-indicator"></div>
+        <a class="nav-link" href="#about" data-section="about">About</a>
+        <a class="nav-link" href="#education" data-section="education">Education</a>
+        <a class="nav-link" href="#experience" data-section="experience">Experience</a>
+        <a class="nav-link" href="#projects" data-section="projects">Projects</a>
+        <a class="nav-link" href="#skills" data-section="skills">Skills</a>
+        <a class="nav-link" href="#contact" data-section="contact">Contact</a>
       </div>
       <div class="nav-cta">
         <a class="btn btn-ghost btn-sm" href="https://www.linkedin.com/in/shreepoorna-dp-870737192" target="_blank">LinkedIn</a>
@@ -392,6 +397,45 @@
     }
     type();
     document.getElementById("year").textContent=new Date().getFullYear();
+
+    // Sliding nav indicator
+    const indicator=document.querySelector('.nav-indicator');
+    const navLinks=document.querySelectorAll('.nav-link[data-section]');
+    const sections=document.querySelectorAll('section[id]');
+    
+    function moveIndicator(link){
+      if(!link||!indicator)return;
+      const rect=link.getBoundingClientRect();
+      const parent=link.parentElement.getBoundingClientRect();
+      indicator.style.width=rect.width+'px';
+      indicator.style.left=(rect.left-parent.left)+'px';
+      indicator.style.top=(rect.top-parent.top)+'px';
+      indicator.classList.add('visible');
+    }
+    
+    function updateActiveSection(){
+      let current='about';
+      const scrollY=window.scrollY+150;
+      sections.forEach(s=>{
+        if(scrollY>=s.offsetTop)current=s.id;
+      });
+      navLinks.forEach(link=>{
+        link.classList.remove('active');
+        if(link.dataset.section===current){
+          link.classList.add('active');
+          moveIndicator(link);
+        }
+      });
+    }
+    
+    window.addEventListener('scroll',updateActiveSection,{passive:true});
+    window.addEventListener('resize',()=>{
+      const active=document.querySelector('.nav-link.active');
+      if(active)moveIndicator(active);
+    });
+    
+    // Initialize
+    setTimeout(updateActiveSection,100);
   </script>
 </body>
 </html>
