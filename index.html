@@ -558,9 +558,18 @@
     function updateActiveSection(){
       let current='about';
       const scrollY=window.scrollY+150;
-      sections.forEach(s=>{
-        if(scrollY>=s.offsetTop)current=s.id;
-      });
+      const windowHeight=window.innerHeight;
+      const docHeight=document.documentElement.scrollHeight;
+      
+      // Check if scrolled to bottom (for Contact section)
+      if(scrollY+windowHeight>=docHeight-50){
+        current='contact';
+      }else{
+        sections.forEach(s=>{
+          if(s.id&&scrollY>=s.offsetTop)current=s.id;
+        });
+      }
+      
       navLinks.forEach(link=>{
         link.classList.remove('active');
         if(link.dataset.section===current){
