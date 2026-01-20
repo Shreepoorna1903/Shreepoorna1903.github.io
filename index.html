@@ -431,20 +431,27 @@
     type();
     document.getElementById("year").textContent=new Date().getFullYear();
 
-    // Visitor Counter
+    // Visitor Counter using CountAPI
     async function updateVisitorCount(){
       const countEl=document.getElementById('visitorCount');
       try{
-        let count=1;
-        const result=await window.storage.get('visitor-count',true);
-        if(result&&result.value){
-          count=parseInt(result.value)+1;
-        }
-        await window.storage.set('visitor-count',count.toString(),true);
-        countEl.textContent=count.toLocaleString();
+        // Using CountAPI - replace 'shreepoorna-portfolio' with your unique key
+        const res=await fetch('https://api.countapi.xyz/hit/shreepoorna-portfolio/visits');
+        const data=await res.json();
+        countEl.textContent=data.value.toLocaleString();
       }catch(e){
-        // Fallback if storage not available
-        countEl.textContent='1,247';
+        // Fallback to storage API
+        try{
+          let count=1;
+          const result=await window.storage.get('visitor-count',true);
+          if(result&&result.value){
+            count=parseInt(result.value)+1;
+          }
+          await window.storage.set('visitor-count',count.toString(),true);
+          countEl.textContent=count.toLocaleString();
+        }catch(e2){
+          countEl.textContent='0';
+        }
       }
     }
     updateVisitorCount();
