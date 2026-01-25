@@ -8,7 +8,6 @@
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     
-    /* Scroll Progress Bar */
     .progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:1000;width:0%;transition:width .1s linear}
     :root{
       --bg:#09090b;--bg2:#111113;
@@ -21,7 +20,6 @@
     html{scroll-behavior:smooth}
     body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
     
-    /* Animated Canvas Background */
     #bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
     
     .bg-glow{position:fixed;border-radius:50%;filter:blur(150px);pointer-events:none;z-index:0}
@@ -34,8 +32,7 @@
     .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
     .logo{font-weight:700;font-size:17px;display:flex;align-items:center;gap:10px}
     .logo-dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2))}
-    .nav-links{display:flex;gap:6px;flex-wrap:wrap}
-    .nav-links{position:relative}
+    .nav-links{position:relative;display:flex;gap:6px;flex-wrap:wrap}
     .nav-indicator{position:absolute;height:34px;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);border-radius:6px;transition:all .3s cubic-bezier(.4,0,.2,1);pointer-events:none;opacity:0}
     .nav-indicator.visible{opacity:1}
     .nav-link{color:var(--text-muted);font-size:13px;text-decoration:none;padding:8px 14px;border-radius:6px;transition:color .2s;position:relative;z-index:1}
@@ -79,16 +76,9 @@
     .sidebar-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px}
     .card-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
     .avatar{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+    .avatar-img{width:48px;height:48px;border-radius:10px;object-fit:cover;border:2px solid rgba(139,92,246,0.3)}
     .card-title{font-weight:700;font-size:15px}
     .card-subtitle{font-size:12px;color:var(--text-dim)}
-    .visitor-count{display:flex;align-items:center;justify-content:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(139,92,246,0.15),rgba(6,182,212,0.1));border:1px solid rgba(139,92,246,0.3);border-radius:12px;max-width:400px;margin:0 auto}
-    .visitor-left{display:flex;align-items:center;gap:8px}
-    .visitor-label{font-size:14px;font-weight:500;color:var(--text)}
-    .visitor-badge{display:flex;align-items:center;gap:6px;padding:8px 14px;background:rgba(139,92,246,0.25);border-radius:8px}
-    .visitor-num{font-size:18px;font-weight:800;color:var(--accent)}
-    .visitor-text{font-size:12px;color:var(--text-muted)}
-    .wave{font-size:20px;animation:wave 2s ease-in-out infinite}
-    @keyframes wave{0%,100%{transform:rotate(0deg)}25%{transform:rotate(20deg)}75%{transform:rotate(-15deg)}}
     .quick-facts{display:flex;flex-direction:column;gap:10px}
     .fact{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text-muted)}
     .fact-icon{width:28px;height:28px;border-radius:6px;background:rgba(139,92,246,0.1);display:flex;align-items:center;justify-content:center;font-size:12px}
@@ -100,7 +90,6 @@
     .section-header h2{font-size:22px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:10px}
     .section-header p{color:var(--text-dim);font-size:13px}
 
-    /* Education */
     .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     @media(max-width:700px){.edu-grid{grid-template-columns:1fr}}
     .edu-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:all .2s}
@@ -114,7 +103,6 @@
     .edu-courses{font-size:12px;color:var(--text-dim);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
     .edu-courses b{color:var(--text-muted)}
 
-    /* Experience */
     .exp-timeline{display:flex;flex-direction:column;gap:16px}
     .exp-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;transition:all .2s;position:relative}
     .exp-card:hover{border-color:var(--border-hover)}
@@ -133,7 +121,6 @@
     .exp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
     .exp-tag{font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:4px;color:var(--text-dim)}
 
-    /* Experience Snapshot */
     .snapshot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
     @media(max-width:800px){.snapshot-grid{grid-template-columns:repeat(2,1fr)}}
     .snapshot{padding:18px;background:var(--card);border:1px solid var(--border);border-radius:10px;text-align:center;transition:all .2s}
@@ -141,7 +128,6 @@
     .snapshot-val{font-size:26px;font-weight:700;margin-bottom:4px}
     .snapshot-label{font-size:11px;color:var(--text-dim);line-height:1.4}
 
-    /* Projects */
     .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     @media(max-width:900px){.project-grid{grid-template-columns:1fr}}
     .project-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;transition:all .3s;position:relative;overflow:hidden}
@@ -159,7 +145,6 @@
     .metric b{color:var(--accent);font-weight:700}
     .project-links{display:flex;gap:8px}
 
-    /* Skills */
     .skills-section{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     @media(max-width:700px){.skills-section{grid-template-columns:1fr}}
     .skill-group{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px}
@@ -170,7 +155,6 @@
     .skill:hover{border-color:var(--border-hover);color:var(--text)}
     .skill.strong{border-color:rgba(139,92,246,0.3);background:rgba(139,92,246,0.08);color:var(--text)}
 
-    /* Contact */
     .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     @media(max-width:600px){.contact-grid{grid-template-columns:1fr}}
     .contact-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;display:flex;align-items:center;gap:14px;transition:all .2s;text-decoration:none}
@@ -179,14 +163,12 @@
     .contact-label{font-size:12px;color:var(--text-dim)}
     .contact-value{font-size:14px;color:var(--text);font-weight:600}
 
-    /* Scroll Reveal Animations */
     .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
     .reveal.visible{opacity:1;transform:translateY(0)}
     .reveal-delay-1{transition-delay:.1s}
     .reveal-delay-2{transition-delay:.2s}
     .reveal-delay-3{transition-delay:.3s}
     
-    /* Card Tilt Effect */
     .tilt-card{transform-style:preserve-3d;transition:transform .15s ease-out}
     .tilt-card .tilt-content{transform:translateZ(20px)}
     
@@ -243,7 +225,7 @@
       </div>
       <div class="sidebar-card fade-up d2">
         <div class="card-header">
-          <div class="avatar">SP</div>
+          <img class="avatar-img" src="https://github.com/Shreepoorna1903.png" alt="Shreepoorna Purohit"/>
           <div><div class="card-title">Quick Profile</div><div class="card-subtitle">AI/ML • Systems • Cloud</div></div>
         </div>
         <div class="quick-facts">
@@ -418,22 +400,11 @@
 
   <footer>
     <div class="container">
-      <div class="visitor-count">
-        <div class="visitor-left">
-          <span class="wave">👋</span>
-          <span class="visitor-label">Thanks for stopping by!</span>
-        </div>
-        <div class="visitor-badge">
-          <span class="visitor-num" id="visitorCount">...</span>
-          <span class="visitor-text">views</span>
-        </div>
-      </div>
       <div style="margin-top:16px">Built with precision · © <span id="year"></span> Shreepoorna Purohit</div>
     </div>
   </footer>
 
   <script>
-    // Typing animation
     const phrases=["AI/ML","NLP","Cloud Systems","Deep Learning"];
     const el=document.getElementById("typed");
     let pi=0,ci=0,del=false;
@@ -446,31 +417,6 @@
     type();
     document.getElementById("year").textContent=new Date().getFullYear();
 
-    // Visitor Counter - Live using persistent storage
-    async function updateVisitorCount(){
-      const countEl=document.getElementById('visitorCount');
-      try{
-        let count=1;
-        try{
-          const result=await window.storage.get('portfolio-views',true);
-          if(result&&result.value){
-            count=parseInt(result.value)+1;
-          }
-        }catch(e){
-          // Key doesn't exist yet, start at 1
-          count=1;
-        }
-        await window.storage.set('portfolio-views',count.toString(),true);
-        countEl.textContent=count;
-      }catch(e){
-        countEl.textContent='1';
-      }
-    }
-    updateVisitorCount();
-    
-    document.getElementById("year").textContent=new Date().getFullYear();
-
-    // Scroll Progress Bar
     const progressBar=document.getElementById('progress');
     window.addEventListener('scroll',()=>{
       const scrollTop=document.documentElement.scrollTop;
@@ -479,7 +425,6 @@
       progressBar.style.width=progress+'%';
     },{passive:true});
 
-    // Animated Background Canvas
     const canvas=document.getElementById('bg-canvas');
     const ctx=canvas.getContext('2d');
     let w,h,particles=[];
@@ -498,9 +443,7 @@
     });
     
     class Particle{
-      constructor(){
-        this.reset();
-      }
+      constructor(){this.reset()}
       reset(){
         this.x=Math.random()*w;
         this.y=Math.random()*h;
@@ -557,7 +500,6 @@
     }
     animate();
 
-    // Scroll Reveal
     const revealEls=document.querySelectorAll('.reveal');
     const revealObserver=new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
@@ -568,7 +510,6 @@
     },{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
     revealEls.forEach(el=>revealObserver.observe(el));
 
-    // Card Tilt Effect
     const tiltCards=document.querySelectorAll('.tilt-card');
     tiltCards.forEach(card=>{
       card.addEventListener('mousemove',e=>{
@@ -586,7 +527,6 @@
       });
     });
 
-    // Sliding nav indicator
     const indicator=document.querySelector('.nav-indicator');
     const navLinks=document.querySelectorAll('.nav-link[data-section]');
     const sections=document.querySelectorAll('section[id]');
@@ -607,7 +547,6 @@
       const windowHeight=window.innerHeight;
       const docHeight=document.documentElement.scrollHeight;
       
-      // Check if scrolled to bottom (for Contact section)
       if(scrollY+windowHeight>=docHeight-50){
         current='contact';
       }else{
